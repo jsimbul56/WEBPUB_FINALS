@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Millet's Barbecue House</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script type="module">
+
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js';
+        import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyATwwskOTNusM5upnI2Qwr7XPV8ZjWWhtQ",
+            authDomain: "millet-s-bbq-house.firebaseapp.com",
+            projectId: "millet-s-bbq-house",
+            storageBucket: "millet-s-bbq-house.appspot.com",
+            messagingSenderId: "371340325689",
+            appId: "1:371340325689:web:ffd28fcb1d70c996f56ee8",
+            measurementId: "G-3YTXEEG8E3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+
+        const db = getFirestore(app);
+
+        window.db = db;
+
+       
+        import './scripts/script.js'; 
+        import './scripts/order.js';
+        
+
+    </script>
+</head>
+<body>
+
+  <header>
+      <div class="logo">
+          <a href="index.html"><img src="images/resized-logo.png" alt="Millet's BBQ Logo"></a>
+      </div>
+      <nav>
+          <ul>
+              <li><a href="index.html">HOME</a></li>
+              <li><a href="feature.html">FEATURE</a></li>
+              <li><a href="products.html">PRODUCTS</a></li>
+              <li><a href="contact.html">CONTACT US</a></li>
+          </ul>
+      </nav>
+
+      
+  </header>
+
+  <div class="cart-icon">
+    <i class="fas fa-shopping-cart"></i>
+    <div id="cart-modal" class="cart-modal">
+        <h2>Your Cart</h2>
+
+        <label for="customer-name">Name:</label>
+        <input type="text" id="customer-name" placeholder="Enter your name" required>
+        <br>
+        <label for="customer-phone">Phone Number:</label>
+        <input type="tel" id="customer-phone" name="customer-phone" pattern="[0-9]{11}" placeholder="Enter your phone number" required>
+        <br><br>
+
+        <table id="cart-table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">Total:</td>
+                    <td>P<span id="cart-total">0</span></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <button id="clear-cart-btn">Clear Cart</button>
+        <button id="checkout-btn">Checkout</button>
+    </div>
+</div>
+
+<script>
+    const cartModal = document.getElementById('cart-modal');
+    cartModal.addEventListener('click', event => event.stopPropagation());
+</script>
+
+<section class="menu-section">
+    <h2>Our Menu</h2>
+    <div class="food-gallery">
+        <div class="gallery-item" data-name="Sisig" data-price="130">
+            <img src="images/sisig.jpg" alt="Sisig" class="menu-img" onclick="enlargeImage(this)">
+            <p>Sisig</p>
+            <span>₱ 130</span>
+            <input type="number" class="quantity-input" value="1" min="1">
+            <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+        <div class="gallery-item" data-name="Pork BBQ" data-price="25">
+            <img src="images/pork.jpg" alt="Pork BBQ" class="menu-img" onclick="enlargeImage(this)">
+            <p>Pork BBQ</p>
+            <span>₱ 25/stick</span>
+            <input type="number" class="quantity-input" value="1" min="1">
+            <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+        <div class="gallery-item" data-name="Chicken Butt" data-price="55">
+            <img src="images/chx ass.jpg" alt="Chicken Butt" class="menu-img" onclick="enlargeImage(this)">
+            <p>Chicken Butt</p>
+            <span>₱ 55/stick</span>
+            <input type="number" class="quantity-input" value="1" min="1">
+            <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+        <div class="gallery-item" data-name="Isaw" data-price="10">
+            <img src="images/isaw.jpg" alt="Isaw" class="menu-img" onclick="enlargeImage(this)">
+            <p>Isaw</p>
+            <span>₱ 10/stick</span>
+            <input type="number" class="quantity-input" value="1" min="1">
+            <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+        <div class="gallery-item" data-name="Tenga" data-price="22">
+            <img src="images/tenga.jpg" alt="Tenga" class="menu-img" onclick="enlargeImage(this)">
+            <p>Tenga</p>
+            <span>₱ 22/stick</span>
+            <input type="number" class="quantity-input" value="1" min="1">
+            <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+        <div class="gallery-item" data-name="Leche Flan" data-price="120">
+            <img src="images/leche flan.jpg" alt="Leche Flan" class="menu-img" onclick="enlargeImage(this)">
+            <p>Leche Flan</p>
+            <span>₱ 120</span>
+            <input type="number" class="quantity-input" value="1" min="1">
+            <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+  <div class="order-section">
+      <button id="order-btn">I would like to order</button>
+  </div>
+
+  <footer>
+      <div class="social-media">
+          <a href="#"><img src="images/fb-logo.png" alt="Facebook"></a>
+          <a href="#"><img src="images/tik-logo.png" alt="Tiktok"></a>
+          <a href="#"><img src="images/ig-logo.png" alt="Instagram"></a>
+      </div>
+  </footer>
+
+  <div id="image-modal" class="image-modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <img src="" alt="Enlarged Image">
+    </div>
+  </div>
+
+
+
+</body>
+</html>
