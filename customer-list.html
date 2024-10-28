@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer List | Millet's BBQ House</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="images/resized-logo.png" alt="Millet's BBQ Logo"></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="feature.html">FEATURE</a></li>
+                <li><a href="products.html">PRODUCTS</a></li>
+                <li><a href="contact.html">CONTACT US</a></li>
+                <li><a href="customer-list.html">CUSTOMER LIST</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="customer-list">
+            <h2>Customer Feedback List</h2>
+            <div class="form-card" id="feedback-container">
+                <!-- Feedback entries will be dynamically added here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-media">
+            <a href="#"><img src="images/fb-logo.png" alt="Facebook"></a>
+            <a href="#"><img src="images/tik-logo.png" alt="Tiktok"></a>
+            <a href="#"><img src="images/ig-logo.png" alt="Instagram"></a>
+        </div>
+    </footer>
+
+    
+    <!-- Add your Firebase configuration here -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js";
+    
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyATwwskOTNusM5upnI2Qwr7XPV8ZjWWhtQ",
+            authDomain: "millet-s-bbq-house.firebaseapp.com",
+            projectId: "millet-s-bbq-house",
+            storageBucket: "millet-s-bbq-house.appspot.com",
+            messagingSenderId: "371340325689",
+            appId: "1:371340325689:web:ffd28fcb1d70c996f56ee8",
+            measurementId: "G-3YTXEEG8E3"
+        };
+    
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+    
+        // Function to fetch feedback data
+        async function fetchFeedback() {
+            const feedbackContainer = document.getElementById('feedback-container');
+            const feedbacksCol = collection(db, 'feedbacks'); // Get reference to the 'feedbacks' collection
+            const snapshot = await getDocs(feedbacksCol); // Fetch the documents
+    
+            if (snapshot.empty) {
+                feedbackContainer.innerHTML = `<p>No feedback available.</p>`;
+                console.log("No documents found in the 'feedbacks' collection.");
+                return;
+            }
+    
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                const feedbackDiv = document.createElement('div');
+                feedbackDiv.className = 'feedback-entry';
+                feedbackDiv.innerHTML = `
+                    <p><strong>Name:</strong> ${data.name}</p>
+                    <p><strong>Email:</strong> ${data.email}</p>
+                    <p><strong>Feedback:</strong> ${data.feedbackMessage}</p>
+                    <hr> <br>
+                `;
+                feedbackContainer.appendChild(feedbackDiv);
+            });
+        }
+    
+        // Call the function to fetch feedback
+        fetchFeedback();
+    </script>
+    
+</body>
+</html>

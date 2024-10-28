@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Preview</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Email Preview</h1>
+    </header>
+    <main>
+
+        <img src="images/emailmarketing.jpg" alt="Email" style="max-width: 100%; height: auto;">
+        <button class="back-btn" onclick="window.history.back()">Back</button>
+    </main>
+    <header>
+       <h1>Promo Marketing</h1> 
+       <p>At Millet's BBQ House, we believe that a strong promotional marketing strategy is essential to connect with our valued customers and enhance their dining experience. Our promotional campaigns aim to not only inform you about our latest offers and menu items but also to create a sense of community among our patrons. Whether it’s through exclusive discounts, special events, or seasonal menus, we strive to engage and delight you with our delicious offerings. Join us in celebrating food, flavor, and fun at Millet's BBQ House.</p>
+    </header>
+</body>
+</html>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        padding: 20px;
+        margin: 0;
+    }
+
+    header {
+        background-color: #000;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    main {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .back-btn {
+        margin-top: 20px;
+        padding: 10px 15px;
+        background-color: #000;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .back-btn:hover {
+        background-color: #444;
+    }
+</style>
+
+<script>
+    document.getElementById('email-subject-value').innerText = localStorage.getItem('emailSubject') || 'No Subject';
+    document.getElementById('email-message-value').innerText = localStorage.getItem('emailMessage') || 'No Message';
+</script>
